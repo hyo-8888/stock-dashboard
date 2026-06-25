@@ -349,20 +349,20 @@
 
 <script>
 const portfolio = [
-  { name: '삼성전자', ticker: '005930.KS', qty: 121, avgPrice: 311862, currentPrice: 358500, targetPrice: 530000, guide: '50만 부근 일부 차익실현', rec: 'buy' },
-  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 503000, targetPrice: 800000, guide: '75~80만 정리 검토', rec: 'hold' },
-  { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 200000, guide: '18~20만 목표', rec: 'hold' },
-  { name: 'LS Electric', ticker: '010120.KS', qty: 3, avgPrice: 257333, currentPrice: 219000, targetPrice: 260000, guide: '중간목표 26만. 한투 28.5만 상향(6/4)', rec: 'hold' },
-  { name: '한중엔시에스', ticker: '107640.KQ', qty: 14, avgPrice: 47600, currentPrice: 33650, targetPrice: 80000, guide: '상상인 9.7만, 유안타 6.3만', rec: 'buy' },
-  { name: '일진전기', ticker: '103590.KS', qty: 5, avgPrice: 86720, currentPrice: 72700, targetPrice: 123800, guide: '컨센서스 12.4만, 유안타 15만. 초고압변압기', rec: 'buy' },
+  { name: '삼성전자', ticker: '005930.KS', qty: 121, avgPrice: 311862, currentPrice: 358500, targetPrice: 467000, guide: '컨센서스 46.7만(6/25). 45만 부근 일부 차익실현', rec: 'buy' },
+  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 503000, targetPrice: 820000, guide: '컨센서스 82만(6/25). 80만 부근 정리 검토', rec: 'hold' },
+  { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 142000, guide: '컨센서스 14.2만(6/25). 키움 AI+로봇 밸류', rec: 'hold' },
+  { name: 'LS Electric', ticker: '010120.KS', qty: 3, avgPrice: 257333, currentPrice: 219000, targetPrice: 260000, guide: '컨센서스 26만(6/25). 유안타 수주 가이던스 상향(6/11)', rec: 'hold' },
+  { name: '한중엔시에스', ticker: '107640.KQ', qty: 14, avgPrice: 47600, currentPrice: 33650, targetPrice: 97000, guide: '컨센서스 9.7만(6/25). ESS 냉각 성장', rec: 'buy' },
+  { name: '일진전기', ticker: '103590.KS', qty: 5, avgPrice: 86720, currentPrice: 72700, targetPrice: 124000, guide: '컨센서스 12.4만(6/25). 유안타 15만. 초고압변압기', rec: 'buy' },
   { name: '에코프로머티', ticker: '450080.KQ', qty: 10, avgPrice: 60100, currentPrice: 45550, targetPrice: 82000, guide: '흑자전환 확인 후 판단', rec: 'hold' },
-  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 34250, targetPrice: 60000, guide: '하반기 AI 실적 확인 필요', rec: 'hold' },
-  { name: '두산에너빌리티', ticker: '034020.KS', qty: 3, avgPrice: 101266, currentPrice: 87800, targetPrice: 157000, guide: '신한 15.7만, KB 15.6만', rec: 'buy' },
-  { name: '삼성에스디에스', ticker: '018260.KS', qty: 6, avgPrice: 273400, currentPrice: 190600, targetPrice: 230000, guide: '목표가 23만 < 매수가. 본전 도달 시 매도', rec: 'sell' },
+  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 34250, targetPrice: 72000, guide: '컨센서스 7.2만(6/25). 하반기 AI 실적 확인', rec: 'hold' },
+  { name: '두산에너빌리티', ticker: '034020.KS', qty: 3, avgPrice: 101266, currentPrice: 87800, targetPrice: 150000, guide: '컨센서스 15만(6/25). 원전·SMR 모멘텀', rec: 'buy' },
+  { name: '삼성에스디에스', ticker: '018260.KS', qty: 6, avgPrice: 273400, currentPrice: 190600, targetPrice: 228000, guide: '컨센서스 22.8만(6/25). 목표가 < 매수가. 본전 도달 시 매도', rec: 'sell' },
   { name: 'SOL AI반도체', ticker: '480040.KS', qty: 3, avgPrice: 25001, currentPrice: 21450, targetPrice: null, guide: '투자금 소액. 정리', rec: 'sell' },
-  { name: '삼성SDI', ticker: '006400.KS', qty: 7, avgPrice: 585571, currentPrice: 481000, targetPrice: 850000, guide: 'KB 85만, IBK 80만. 하반기 흑자전환', rec: 'buy' },
-  { name: 'LG씨엔에스', ticker: '064400.KS', qty: 7, avgPrice: 116614, currentPrice: 78300, targetPrice: 105000, guide: 'KB 10.5만(5/28). 목표가 < 매수가. 본전 도달 시 매도', rec: 'sell' },
-  { name: 'NAVER', ticker: '035420.KS', qty: 2, avgPrice: 261500, currentPrice: 199700, targetPrice: 314000, guide: '평균 31.4만. 30만 1차 매도', rec: 'hold' },
+  { name: '삼성SDI', ticker: '006400.KS', qty: 7, avgPrice: 585571, currentPrice: 481000, targetPrice: 838000, guide: '컨센서스 83.8만(6/25). 하반기 흑자전환', rec: 'buy' },
+  { name: 'LG씨엔에스', ticker: '064400.KS', qty: 7, avgPrice: 116614, currentPrice: 78300, targetPrice: 95000, guide: '컨센서스 9.5만(6/25). 목표가 < 매수가. 본전 도달 시 매도', rec: 'sell' },
+  { name: 'NAVER', ticker: '035420.KS', qty: 2, avgPrice: 261500, currentPrice: 199700, targetPrice: 329000, guide: '컨센서스 32.9만(6/25). 30만 1차 매도', rec: 'hold' },
   { name: '한미반도체', ticker: '042700.KS', qty: 5, avgPrice: 280100, currentPrice: 273000, targetPrice: 380000, guide: 'BofA 50만, 상상인 38만. 2Q V자 반등', rec: 'buy' },
 ];
 
