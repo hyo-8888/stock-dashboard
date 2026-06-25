@@ -99,6 +99,8 @@
     max-width: 220px;
     line-height: 1.4;
     word-break: keep-all;
+    vertical-align: middle;
+    text-align: center;
   }
   @media (max-width: 1200px) {
     .hide-narrow { display: none; }
@@ -296,7 +298,7 @@
             <th class="right">매수가</th>
             <th class="right">현재가 (수정 가능)</th>
             <th class="right hide-narrow">투자금</th>
-            <th class="right hide-narrow">평가액</th>
+            <th class="right hide-narrow">목표 손익</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -451,7 +453,7 @@ function recalculate() {
       <td class="right">${fmt(d.avgPrice)}</td>
       <td class="right"><input class="price-input" type="text" data-idx="${origIdx}" value="${fmt(d.currentPrice)}" /></td>
       <td class="right hide-narrow">${fmt(d.invested)}</td>
-      <td class="right hide-narrow">${fmt(d.value)}</td>
+      <td class="right hide-narrow ${d.targetPrice ? pnlClass((d.targetPrice - d.avgPrice) * d.qty) : ''}">${d.targetPrice ? ((d.targetPrice - d.avgPrice) * d.qty >= 0 ? '+' : '') + fmt((d.targetPrice - d.avgPrice) * d.qty) : '-'}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -464,8 +466,8 @@ function recalculate() {
     <td class="right ${pnlClass(totalPnlPct)}">${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(1)}%</td>
     <td class="right ${pnlClass(totalPnl)}">${totalPnl >= 0 ? '+' : ''}${fmt(totalPnl)}</td>
     <td colspan="5" style="text-align:right;"></td>
-    <td class="right">${fmt(totalInvested)}</td>
-    <td class="right">${fmt(totalValue)}</td>
+    <td class="right hide-narrow">${fmt(totalInvested)}</td>
+    <td class="right hide-narrow">${(() => { const totalTargetPnl = data.reduce((sum, d) => sum + (d.targetPrice ? (d.targetPrice - d.avgPrice) * d.qty : 0), 0); return '<span class="' + pnlClass(totalTargetPnl) + '">' + (totalTargetPnl >= 0 ? '+' : '') + fmt(totalTargetPnl) + '</span>'; })()}</td>
   `;
   tbody.appendChild(totalTr);
   
