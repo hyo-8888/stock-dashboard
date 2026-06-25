@@ -13,7 +13,7 @@
     min-height: 100vh;
     padding: 24px;
   }
-  .container { max-width: 1200px; margin: 0 auto; }
+  .container { max-width: 1400px; margin: 0 auto; }
   h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
   .subtitle { color: #8b949e; font-size: 14px; margin-bottom: 24px; }
   
@@ -88,10 +88,20 @@
   }
   th.right, td.right { text-align: right; }
   td {
-    padding: 14px 16px;
-    font-size: 14px;
+    padding: 14px 12px;
+    font-size: 13px;
     border-bottom: 1px solid #21262d;
     white-space: nowrap;
+  }
+  td.guide-cell {
+    white-space: normal;
+    min-width: 160px;
+    max-width: 220px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  @media (max-width: 1200px) {
+    .hide-narrow { display: none; }
   }
   tr:last-child td { border-bottom: none; }
   tr:hover { background: #1c2128; }
@@ -285,8 +295,8 @@
             <th class="right">수량</th>
             <th class="right">매수가</th>
             <th class="right">현재가 (수정 가능)</th>
-            <th class="right">투자금</th>
-            <th class="right">평가액</th>
+            <th class="right hide-narrow">투자금</th>
+            <th class="right hide-narrow">평가액</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -436,12 +446,12 @@ function recalculate() {
       <td class="right ${pnlClass(d.pnlPct)}">${d.pnlPct >= 0 ? '+' : ''}${d.pnlPct.toFixed(1)}%</td>
       <td class="right ${pnlClass(d.pnl)}">${d.pnl >= 0 ? '+' : ''}${fmt(d.pnl)}</td>
       <td class="right" style="color:#ffa500;">${d.targetPrice ? fmt(d.targetPrice) : '-'}</td>
-      <td style="font-size:12px;color:#8b949e;max-width:120px;">${d.guide || ''}</td>
+      <td class="guide-cell" style="font-size:12px;color:#8b949e;">${d.guide || ''}</td>
       <td class="right">${d.qty}주</td>
       <td class="right">${fmt(d.avgPrice)}</td>
       <td class="right"><input class="price-input" type="text" data-idx="${origIdx}" value="${fmt(d.currentPrice)}" /></td>
-      <td class="right">${fmt(d.invested)}</td>
-      <td class="right">${fmt(d.value)}</td>
+      <td class="right hide-narrow">${fmt(d.invested)}</td>
+      <td class="right hide-narrow">${fmt(d.value)}</td>
     `;
     tbody.appendChild(tr);
   });
