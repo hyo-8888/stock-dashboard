@@ -363,6 +363,7 @@
 const portfolio = [
   { name: '삼성전자', ticker: '005930.KS', qty: 126, avgPrice: 310987, currentPrice: 286000, targetPrice: 530000, guide: '50만 차익실현. 2H26 메모리 호황', rec: 'buy' },
   { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 482000, targetPrice: 820000, guide: '80만 정리 검토. 2H26 실적 모멘텀', rec: 'hold' },
+  { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 200000, guide: '키움 20만. 2026.8 AI 2차 평가', rec: 'hold' },
   { name: 'SK하이닉스', ticker: '000660.KS', qty: 2, avgPrice: 2325000, currentPrice: 2187000, targetPrice: 3500000, guide: 'HBM 1위. 나스닥 ADR 7/10', rec: 'buy' },
   { name: 'LS Electric', ticker: '010120.KS', qty: 4, avgPrice: 253500, currentPrice: 236500, targetPrice: 260000, guide: '유안타 30만(6/11). 본격 2027~28', rec: 'hold' },
   { name: '한중엔시에스', ticker: '107640.KQ', qty: 15, avgPrice: 46426, currentPrice: 34900, targetPrice: 97000, guide: '유안타 BUY(6/24). 본격 2027.6 미국공장', rec: 'buy' },
@@ -585,6 +586,7 @@ function switchTab(tabName) {
 const analysisData = [
   { name: '삼성전자', medianTarget: 530000, sources: 'SK증권 610k(6/1 최고), 키움 430k(6/1), KB 530k, 미래에셋 480k', coverCount: 30, latestDate: '2026-06', fresh: true, note: 'HBM 슈퍼사이클. 올해 영업이익 100조 전망' },
   { name: '현대차', medianTarget: 800000, sources: 'KB 1,200k, 삼성 700k, 컨센 평균 672k (26개사)', coverCount: 26, latestDate: '2026-05', fresh: true, note: '피지컬AI/로보틱스 모멘텀' },
+  { name: 'LG', medianTarget: 200000, sources: '키움 200k (6/1 상향)', coverCount: 1, latestDate: '2026-06', fresh: true, note: 'AI연구원+NAV 역대최고 37.5조' },
   { name: 'SK하이닉스', medianTarget: 3500000, sources: '한화 4,300k, 삼성 3,500k, KB 3,800k, 하나 3,600k, 교보 4,000k(7/1)', coverCount: 21, latestDate: '2026-07', fresh: true, note: 'HBM 세계 1위. 나스닥 ADR 7/10 상장. 전사 BUY' },
   { name: 'LS Electric', medianTarget: 260000, sources: '한투 285k(6/4), KB 260k, 유안타 260k, NH 275k, 교보 240k, LS증권 350k', coverCount: 9, latestDate: '2026-06', fresh: true, note: '한투 6/4 상향! 2Q +43% 전망. 북미 데이터센터 수주 1.5조' },
   { name: '한중엔시에스', medianTarget: 80000, sources: '상상인 97k(매수), 유안타 63k(매수)', coverCount: 2, latestDate: '2026-05', fresh: true, note: '삼성SDI ESS 냉각 독점. 미국 공장 착공' },
