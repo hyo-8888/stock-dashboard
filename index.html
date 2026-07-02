@@ -361,24 +361,24 @@
 
 <script>
 const portfolio = [
-  { name: '삼성전자', ticker: '005930.KS', qty: 126, avgPrice: 310987, currentPrice: 286000, targetPrice: 530000, guide: '50만 차익실현. 2H26 메모리 호황', rec: 'buy' },
-  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 482000, targetPrice: 830000, guide: '83만 정리 검토. 유진 100만 최고', rec: 'hold' },
   { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 140000, guide: '컨센 13.5만(11개사). 키움 20만 최고', rec: 'hold' },
-  { name: 'SK하이닉스', ticker: '000660.KS', qty: 2, avgPrice: 2325000, currentPrice: 2187000, targetPrice: 3500000, guide: 'HBM 1위. 나스닥 ADR 7/10', rec: 'buy' },
-  { name: 'LS Electric', ticker: '010120.KS', qty: 4, avgPrice: 253500, currentPrice: 236500, targetPrice: 300000, guide: 'NH 32.5만(7/1), LS 35만. 목표 상향!', rec: 'buy' },
-  { name: '한중엔시에스', ticker: '107640.KQ', qty: 15, avgPrice: 46426, currentPrice: 34900, targetPrice: 97000, guide: '유안타 BUY(6/24). 본격 2027.6 미국공장', rec: 'buy' },
-  { name: '일진전기', ticker: '103590.KS', qty: 7, avgPrice: 84542, currentPrice: 78900, targetPrice: 134000, guide: 'NH 11.8만(7/1 하향), 유안타 15만 유지', rec: 'buy' },
-  { name: '에코프로머티', ticker: '450080.KQ', qty: 10, avgPrice: 60100, currentPrice: 40350, targetPrice: 82000, guide: '26년 흑자전환 전망. 커버리지 부족. 정리 검토', rec: 'sell' },
-  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 35250, targetPrice: 70000, guide: '컨센 7만(16개사). 유안타 8만 최고', rec: 'hold' },
-  { name: '두산에너빌리티', ticker: '034020.KS', qty: 3, avgPrice: 101266, currentPrice: 86000, targetPrice: 148000, guide: '키움 13만(6/10 하향). NH 14.5만(6/30)', rec: 'buy' },
-  { name: '삼성에스디에스', ticker: '018260.KS', qty: 8, avgPrice: 252112, currentPrice: 201500, targetPrice: 255000, guide: '유안타 29만(6/25), KB 27만 상향! 목표>매수가', rec: 'hold' },
-  { name: 'SOL AI반도체 TOP2+', ticker: '0167A0.KS', qty: 3, avgPrice: 25001, currentPrice: 23350, targetPrice: null, guide: '삼전+하닉 ETF. 소액', rec: 'hold' },
-  { name: '삼성SDI', ticker: '006400.KS', qty: 9, avgPrice: 559833, currentPrice: 470500, targetPrice: 820000, guide: '미래에셋 100만. LS 53만 Hold. 3Q 흑자전환', rec: 'buy' },
-  { name: '삼성전기', ticker: '009150.KS', qty: 1, avgPrice: 1960000, currentPrice: 1926000, targetPrice: 2350000, guide: '메리츠·NH·하나 300만(7/1). 18개사 전사BUY', rec: 'buy' },
   { name: 'LG씨엔에스', ticker: '064400.KS', qty: 8, avgPrice: 111900, currentPrice: 78300, targetPrice: 100000, guide: '유안타 12.5만(6/25 상향). 매수가>목표가', rec: 'sell' },
+  { name: 'LS Electric', ticker: '010120.KS', qty: 4, avgPrice: 253500, currentPrice: 236500, targetPrice: 300000, guide: 'NH 32.5만(7/1), LS 35만. 목표 상향!', rec: 'buy' },
   { name: 'NAVER', ticker: '035420.KS', qty: 3, avgPrice: 239900, currentPrice: 199900, targetPrice: 320000, guide: '하나 40만(7/1), DS 45만. 30만 1차 매도', rec: 'hold' },
-  { name: '한미반도체', ticker: '042700.KS', qty: 5, avgPrice: 280100, currentPrice: 219500, targetPrice: 380000, guide: 'BofA 50만. 2Q26 V자 반등. 2028 용인팹', rec: 'buy' },
+  { name: 'SK하이닉스', ticker: '000660.KS', qty: 2, avgPrice: 2325000, currentPrice: 2187000, targetPrice: 3500000, guide: 'HBM 1위. 나스닥 ADR 7/10', rec: 'buy' },
+  { name: 'SOL AI반도체 TOP2+', ticker: '0167A0.KS', qty: 3, avgPrice: 25001, currentPrice: 23350, targetPrice: null, guide: '삼전+하닉 ETF. 소액', rec: 'hold' },
+  { name: '두산에너빌리티', ticker: '034020.KS', qty: 3, avgPrice: 101266, currentPrice: 86000, targetPrice: 148000, guide: '키움 13만(6/10 하향). NH 14.5만(6/30)', rec: 'buy' },
+  { name: '삼성SDI', ticker: '006400.KS', qty: 9, avgPrice: 559833, currentPrice: 470500, targetPrice: 820000, guide: '미래에셋 100만. LS 53만 Hold. 3Q 흑자전환', rec: 'buy' },
+  { name: '삼성에스디에스', ticker: '018260.KS', qty: 8, avgPrice: 252112, currentPrice: 201500, targetPrice: 255000, guide: '유안타 29만(6/25), KB 27만 상향! 목표>매수가', rec: 'hold' },
+  { name: '삼성전기', ticker: '009150.KS', qty: 1, avgPrice: 1960000, currentPrice: 1926000, targetPrice: 2350000, guide: '메리츠·NH·하나 300만(7/1). 18개사 전사BUY', rec: 'buy' },
+  { name: '삼성전자', ticker: '005930.KS', qty: 126, avgPrice: 310987, currentPrice: 286000, targetPrice: 530000, guide: '50만 차익실현. 2H26 메모리 호황', rec: 'buy' },
+  { name: '에코프로머티', ticker: '450080.KQ', qty: 10, avgPrice: 60100, currentPrice: 40350, targetPrice: 82000, guide: '26년 흑자전환 전망. 커버리지 부족. 정리 검토', rec: 'sell' },
   { name: '원익IPS', ticker: '240810.KQ', qty: 3, avgPrice: 134500, currentPrice: 131600, targetPrice: 176000, guide: 'NH 20.7만(6/29 최고). CVD장비 전공정', rec: 'buy' },
+  { name: '일진전기', ticker: '103590.KS', qty: 7, avgPrice: 84542, currentPrice: 78900, targetPrice: 134000, guide: 'NH 11.8만(7/1 하향), 유안타 15만 유지', rec: 'buy' },
+  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 35250, targetPrice: 70000, guide: '컨센 7만(16개사). 유안타 8만 최고', rec: 'hold' },
+  { name: '한미반도체', ticker: '042700.KS', qty: 5, avgPrice: 280100, currentPrice: 219500, targetPrice: 380000, guide: 'BofA 50만. 2Q26 V자 반등. 2028 용인팹', rec: 'buy' },
+  { name: '한중엔시에스', ticker: '107640.KQ', qty: 15, avgPrice: 46426, currentPrice: 34900, targetPrice: 97000, guide: '유안타 BUY(6/24). 본격 2027.6 미국공장', rec: 'buy' },
+  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 482000, targetPrice: 830000, guide: '83만 정리 검토. 유진 100만 최고', rec: 'hold' },
 ];
 
 const originalPrices = portfolio.map(s => s.currentPrice);
