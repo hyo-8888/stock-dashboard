@@ -361,24 +361,24 @@
 
 <script>
 const portfolio = [
-  { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 135000, guide: '컨센 13.5만(11개사). 키움 20만 최고', rec: 'hold' },
-  { name: 'LG씨엔에스', ticker: '064400.KS', qty: 8, avgPrice: 111900, currentPrice: 78300, targetPrice: 98000, guide: '컨센 9.8만(10개사). 매수가>목표가. 본전매도', rec: 'sell' },
-  { name: 'LS Electric', ticker: '010120.KS', qty: 4, avgPrice: 253500, currentPrice: 236500, targetPrice: 300000, guide: 'NH 32.5만(7/1), LS 35만. 목표 상향!', rec: 'buy' },
-  { name: 'NAVER', ticker: '035420.KS', qty: 3, avgPrice: 239900, currentPrice: 199900, targetPrice: 320000, guide: '하나 40만(7/1), DS 45만. 30만 1차 매도', rec: 'hold' },
+  { name: 'LG', ticker: '003550.KS', qty: 10, avgPrice: 88150, currentPrice: 99400, targetPrice: 145000, guide: '컨센 14.5만(7/10, 상향). 키움 20만 최고', rec: 'hold' },
+  { name: 'LG씨엔에스', ticker: '064400.KS', qty: 8, avgPrice: 111900, currentPrice: 78300, targetPrice: 101000, guide: '컨센 10.1만(7/10). 매수가>목표가. 본전매도', rec: 'sell' },
+  { name: 'LS Electric', ticker: '010120.KS', qty: 4, avgPrice: 253500, currentPrice: 236500, targetPrice: 269000, guide: '컨센 26.9만(7/10, 하향). 중간목표 26만', rec: 'hold' },
+  { name: 'NAVER', ticker: '035420.KS', qty: 3, avgPrice: 239900, currentPrice: 199900, targetPrice: 330000, guide: '컨센 33만(7/10, 소폭 상향). 30만 1차 매도', rec: 'hold' },
   { name: 'SK하이닉스', ticker: '000660.KS', qty: 2, avgPrice: 2325000, currentPrice: 2187000, targetPrice: 3600000, guide: 'KB 420만(7/3). ADR 나스닥 7/10. 25개사', rec: 'buy' },
   { name: 'SOL AI반도체 TOP2+', ticker: '0167A0.KS', qty: 3, avgPrice: 25001, currentPrice: 23350, targetPrice: null, guide: '삼전+하닉 ETF. 소액', rec: 'hold' },
   { name: '두산에너빌리티', ticker: '034020.KS', qty: 3, avgPrice: 101266, currentPrice: 86000, targetPrice: 150000, guide: '컨센 15만(15개사). NH 14.5만(7/2)', rec: 'buy' },
-  { name: '삼성SDI', ticker: '006400.KS', qty: 9, avgPrice: 559833, currentPrice: 470500, targetPrice: 830000, guide: '컨센 83만(23개사). 미래에셋 100만. 3Q 흑전', rec: 'buy' },
-  { name: '삼성에스디에스', ticker: '018260.KS', qty: 8, avgPrice: 252112, currentPrice: 201500, targetPrice: 220000, guide: '컨센 22만(10개사) < 매수가. 본전 도달 시 매도', rec: 'sell' },
+  { name: '삼성SDI', ticker: '006400.KS', qty: 9, avgPrice: 559833, currentPrice: 470500, targetPrice: 802000, guide: '컨센 80.2만(7/10, 소폭 하향). 3Q 흑전', rec: 'buy' },
+  { name: '삼성에스디에스', ticker: '018260.KS', qty: 8, avgPrice: 252112, currentPrice: 201500, targetPrice: 250000, guide: '컨센 25만(7/10, 상향) ≈ 매수가. 본전 도달 시 매도', rec: 'sell' },
   { name: '삼성전기', ticker: '009150.KS', qty: 1, avgPrice: 1960000, currentPrice: 1926000, targetPrice: 2350000, guide: '메리츠·NH·하나 300만(7/1). 18개사 전사BUY', rec: 'buy' },
-  { name: '삼성전자', ticker: '005930.KS', qty: 126, avgPrice: 310987, currentPrice: 286000, targetPrice: 530000, guide: '컨센 53만(25개사). 한투 59만(7/3). 추매OK', rec: 'buy' },
+  { name: '삼성전자', ticker: '005930.KS', qty: 126, avgPrice: 310987, currentPrice: 286000, targetPrice: 514000, guide: '컨센 51.4만(7/10, 소폭 하향). 한투 59만. 추매OK', rec: 'buy' },
   { name: '에코프로머티', ticker: '450080.KQ', qty: 10, avgPrice: 60100, currentPrice: 40350, targetPrice: 82000, guide: '26년 흑자전환 전망. 커버리지 부족. 정리 검토', rec: 'sell' },
   { name: '원익IPS', ticker: '240810.KQ', qty: 3, avgPrice: 134500, currentPrice: 131600, targetPrice: 176000, guide: 'NH 20.7만(6/29 최고). CVD장비 전공정', rec: 'buy' },
   { name: '일진전기', ticker: '103590.KS', qty: 7, avgPrice: 84542, currentPrice: 78900, targetPrice: 118000, guide: 'NH 11.8만(7/1 하향). 3개사뿐. 추매 보류', rec: 'hold' },
-  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 35250, targetPrice: 70000, guide: '컨센 7만(18개사). BNK 6.1만(7/3 하향)', rec: 'hold' },
+  { name: '카카오', ticker: '035720.KS', qty: 10, avgPrice: 43050, currentPrice: 35250, targetPrice: 65000, guide: '컨센 6.5만(7/10, 하향). 하반기 AI 실적 확인', rec: 'hold' },
   { name: '한미반도체', ticker: '042700.KS', qty: 5, avgPrice: 280100, currentPrice: 219500, targetPrice: 380000, guide: 'BofA 50만. 2Q26 V자 반등. 2028 용인팹', rec: 'buy' },
   { name: '한중엔시에스', ticker: '107640.KQ', qty: 15, avgPrice: 46426, currentPrice: 34900, targetPrice: 97000, guide: '유안타 BUY(6/24). 본격 2027.6 미국공장', rec: 'buy' },
-  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 482000, targetPrice: 785000, guide: '컨센 78.5만(26개사). 78만 정리 검토', rec: 'hold' },
+  { name: '현대차', ticker: '005380.KS', qty: 1, avgPrice: 195625, currentPrice: 482000, targetPrice: 808000, guide: '컨센 80.8만(7/10, 상향). 75~80만 정리 검토', rec: 'hold' },
 ];
 
 const originalPrices = portfolio.map(s => s.currentPrice);
@@ -584,24 +584,24 @@ function switchTab(tabName) {
 
 // Analysis data: consensus median target prices
 const analysisData = [
-  { name: 'LG', medianTarget: 135000, sources: '키움 200k(6/1 최고), KB 180k, 한투 153k, 신한 150k, 흥국 135k(6/26)', coverCount: 11, latestDate: '2026-06', fresh: true, note: '키움 200k 외 대부분 120~153k. 컨센 13.5만' },
-  { name: 'LG씨엔에스', medianTarget: 98000, sources: '유안타 125k(6/25 상향), 유진 111k(6/25), KB 105k, 삼성 100k(6/29)', coverCount: 10, latestDate: '2026-06', fresh: true, note: '매수가(11.2만)>컨센(9.8만). 본전 도달 시 매도' },
-  { name: 'LS Electric', medianTarget: 300000, sources: 'LS 350k(6/30), NH 325k(7/1), 대신 300k, 유안타 300k, 한투 285k', coverCount: 6, latestDate: '2026-07', fresh: true, note: 'NH 32.5만(7/1) 대폭 상향! 목표 26만→30만' },
-  { name: 'NAVER', medianTarget: 320000, sources: 'DS 450k(6/9 최고), 하나·신영·다올 400k(7/1), 교보 390k, KB·한투·메리츠 330k', coverCount: 20, latestDate: '2026-07', fresh: true, note: 'AI팩토리 + 커머스. 하나 40만(7/1) 상향' },
+  { name: 'LG', medianTarget: 145000, sources: '키움 200k(6/1 최고), KB 180k, 한투 153k, 신한 150k, 흥국 135k(6/26)', coverCount: 11, latestDate: '2026-07', fresh: true, note: '컨센 14.5만(7/10, 상향). 기준 상향' },
+  { name: 'LG씨엔에스', medianTarget: 101000, sources: '유안타 125k(6/25 상향), 유진 111k(6/25), KB 105k, 삼성 100k(6/29)', coverCount: 10, latestDate: '2026-07', fresh: true, note: '매수가(11.2만)>컨센(10.1만). 본전 도달 시 매도' },
+  { name: 'LS Electric', medianTarget: 269000, sources: 'LS 350k(6/30), NH 325k(7/1), 대신 300k, 유안타 300k, 한투 285k', coverCount: 6, latestDate: '2026-07', fresh: true, note: '컨센 26.9만(7/10, 하향). 개별 리포트 확인 필요' },
+  { name: 'NAVER', medianTarget: 330000, sources: 'DS 450k(6/9 최고), 하나·신영·다올 400k(7/1), 교보 390k, KB·한투·메리츠 330k', coverCount: 20, latestDate: '2026-07', fresh: true, note: '컨센 33만(7/10, 소폭 상향). AI팩토리 + 커머스' },
   { name: 'SK하이닉스', medianTarget: 3600000, sources: 'KB 4,200k(7/3 상향), NH 4,100k(7/2), IBK 4,000k(7/2), 교보 4,000k(7/1), 상상인 3,800k(7/3)', coverCount: 25, latestDate: '2026-07', fresh: true, note: '7월 대량 상향! ADR 나스닥 7/10. 전사 BUY' },
   { name: 'SOL AI반도체 TOP2+', medianTarget: null, sources: 'ETF — 증권사 목표가 없음', coverCount: 0, latestDate: '-', fresh: false, note: '삼성전자+SK하이닉스 중심 ETF. 소액' },
-  { name: '두산에너빌리티', medianTarget: 150000, sources: '신한 157k, 대신 156k, LS 150k, NH 145k(7/2), SK 135k, 키움 130k(6/10 하향)', coverCount: 15, latestDate: '2026-07', fresh: true, note: '컨센 15만(15개사). 원전 스토리 유효' },
-  { name: '삼성SDI', medianTarget: 830000, sources: '미래에셋 1,000k, 상상인 1,000k, 대신 920k, 유안타 913k, 하나 857k, NH 800k(7/2)', coverCount: 23, latestDate: '2026-07', fresh: true, note: '컨센 83만(23개사). LS 531k Hold 주의. 3Q 흑전 유효' },
-  { name: '삼성에스디에스', medianTarget: 220000, sources: '유안타 290k(6/25), KB 270k(6/11), 미래에셋 240k, 한화 210k', coverCount: 10, latestDate: '2026-06', fresh: true, note: '컨센 22만(10개사) < 매수가(25.2만). 본전 도달 시 매도' },
+  { name: '두산에너빌리티', medianTarget: 150000, sources: '신한 157k, 대신 156k, LS 150k, NH 145k(7/2), SK 135k, 키움 130k(6/10 하향)', coverCount: 15, latestDate: '2026-07', fresh: true, note: '컨센 15만(7/10, 유지). 원전·SMR 스토리 유효' },
+  { name: '삼성SDI', medianTarget: 802000, sources: '미래에셋 1,000k, 상상인 1,000k, 대신 920k, 유안타 913k, 하나 857k, NH 800k(7/2)', coverCount: 23, latestDate: '2026-07', fresh: true, note: '컨센 80.2만(7/10, 소폭 하향). LS 531k Hold 주의. 3Q 흑전' },
+  { name: '삼성에스디에스', medianTarget: 250000, sources: '유안타 290k(6/25), KB 270k(6/11), 미래에셋 240k, 한화 210k', coverCount: 10, latestDate: '2026-07', fresh: true, note: '컨센 25만(7/10, 상향) ≈ 매수가(25.2만). 본전 도달 시 매도' },
   { name: '삼성전기', medianTarget: 2350000, sources: '메리츠·iM·NH·하나 3,000k(7/1), 현대차 2,800k, 대신 2,400k, IBK 1,050k(낮음)', coverCount: 18, latestDate: '2026-07', fresh: true, note: '7/1 4개사 300만 동시 상향! IBK 105만 이상치. 전사 BUY' },
-  { name: '삼성전자', medianTarget: 530000, sources: '한투 590k(7/3 상향), SK 610k(6/1 최고), KB 550k(7/1), 교보 500k(7/1 상향51%)', coverCount: 25, latestDate: '2026-07', fresh: true, note: '7월 대량 상향러시. 컨센 53만 유지' },
+  { name: '삼성전자', medianTarget: 514000, sources: '한투 590k(7/3 상향), SK 610k(6/1 최고), KB 550k(7/1), 교보 500k(7/1 상향51%)', coverCount: 25, latestDate: '2026-07', fresh: true, note: '컨센 51.4만(7/10, 소폭 하향). 추매OK 유지' },
   { name: '에코프로머티', medianTarget: 82000, sources: 'AI분석 상단 100k, 하단 54k', coverCount: 1, latestDate: '2026-05', fresh: true, note: '그린에코니켈 연결→매출+190%, 흑자전환 전망' },
   { name: '원익IPS', medianTarget: 176000, sources: 'NH 207k(6/29 최고, 161→207k 상향!), SK 180k, 메리츠 176k, 삼성 170k(6/30), BNK 138k(보유)', coverCount: 5, latestDate: '2026-06', fresh: true, note: 'NH 대폭 상향 긍정적. CVD장비 전공정. 2026 영익 2.5배' },
   { name: '일진전기', medianTarget: 118000, sources: 'NH 118k(7/1 하향! 135→118k), 유안타 150k(6/11), 신한 100k(4/14)', coverCount: 3, latestDate: '2026-07', fresh: true, note: 'NH 하향 주의. 3개사뿐. 추매 보류' },
-  { name: '카카오', medianTarget: 70000, sources: '유안타 80k(6/25 최고), 교보 76k, 신한/하나/메리츠 75k, BNK 61k(7/3 하향)', coverCount: 18, latestDate: '2026-07', fresh: true, note: 'BNK 7/3 하향으나 전체 컨센 7만 유지' },
+  { name: '카카오', medianTarget: 65000, sources: '유안타 80k(6/25 최고), 교보 76k, 신한/하나/메리츠 75k, BNK 61k(7/3 하향)', coverCount: 18, latestDate: '2026-07', fresh: true, note: '컨센 6.5만(7/10, 하향). 하반기 AI 실적 확인' },
   { name: '한미반도체', medianTarget: 380000, sources: '상상인 380k(5/21 BUY)', coverCount: 1, latestDate: '2026-05', fresh: false, note: '커버리지 1개사만. 추가 리포트 확인 필요' },
   { name: '한중엔시에스', medianTarget: 97000, sources: '유안타 97k(6/24 BUY)', coverCount: 1, latestDate: '2026-06', fresh: true, note: '삼성SDI ESS 냉각 독점. 2027.6 미국공장' },
-  { name: '현대차', medianTarget: 785000, sources: 'KB 1,200k, 유진 1,000k, 미래에셋 950k, NH 860k(7/2), 한화 760k(7/1)', coverCount: 26, latestDate: '2026-07', fresh: true, note: '컨센 78.5만(26개사). 유안타 69만 Hold 하향 영향' },
+  { name: '현대차', medianTarget: 808000, sources: 'KB 1,200k, 유진 1,000k, 미래에셋 950k, NH 860k(7/2), 한화 760k(7/1)', coverCount: 26, latestDate: '2026-07', fresh: true, note: '컨센 80.8만(7/10, 상향). 75~80만 정리 검토' },
 ];
 
 function renderAnalysis() {
