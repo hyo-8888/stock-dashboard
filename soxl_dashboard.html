@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOXL 퀀트 매매 대시보드</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #0f1115; color: #e6e9ef; padding: 20px; line-height: 1.5;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  .sub { color: #8b93a7; font-size: 13px; margin-bottom: 20px; }
+  .card { background: #171a21; border: 1px solid #262b36; border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; color: #9fb4ff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; color: #8b93a7; }
+  .field input {
+    background: #0f1115; border: 1px solid #2c3240; border-radius: 8px;
+    color: #e6e9ef; padding: 9px 10px; font-size: 14px; width: 100%;
+  }
+  .field input:focus { outline: none; border-color: #5b7cff; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid #23283340; }
+  th { color: #8b93a7; font-weight: 500; font-size: 12px; }
+  td:first-child, th:first-child { text-align: left; }
+  .buy { color: #5eead4; }
+  .sell { color: #fca5a5; }
+  .big { font-size: 26px; font-weight: 700; }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat { flex: 1; min-width: 130px; background: #0f1115; border: 1px solid #262b36; border-radius: 10px; padding: 12px; }
+  .stat .k { font-size: 12px; color: #8b93a7; margin-bottom: 4px; }
+  .stat .v { font-size: 18px; font-weight: 600; }
+  .hl { background: #1a2740; border-color: #3a5bd0; }
+  .note { font-size: 12px; color: #8b93a7; margin-top: 10px; }
+  .pill { display:inline-block; background:#233; color:#9fb4ff; font-size:11px; padding:2px 8px; border-radius:20px; }
+  .warn { color:#fbbf24; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📊 SOXL 퀀트 매매 대시보드</h1>
+  <div class="sub">값을 바꾸면 자동으로 계산돼요. 총 비중 100 = 총 예산 기준</div>
+
+  <div class="card">
+    <h2>⚙️ 설정</h2>
+    <div class="grid">
+      <div class="field"><label>총 예산 (원)</label><input id="budget" type="number" value="10000000"></div>
+      <div class="field"><label>환율 (원/$)</label><input id="fx" type="number" value="1489"></div>
+    </div>
+    <div class="note">비중1 = <span id="perWeight"></span> · 현재 환율 기준</div>
+  </div>
+
+  <div class="card">
+    <h2>📦 보유 현황</h2>
+    <div class="grid">
+      <div class="field"><label>보유 주수</label><input id="holdQty" type="number" value="5"></div>
+      <div class="field"><label>평단 ($)</label><input id="holdPrice" type="number" value="160.7" step="0.01"></div>
+    </div>
+    <div class="stat-row" style="margin-top:12px">
+      <div class="stat"><div class="k">주당 원화</div><div class="v" id="holdKrwEach"></div></div>
+      <div class="stat"><div class="k">총 매입금액</div><div class="v" id="holdTotal"></div></div>
+      <div class="stat hl"><div class="k">현재 비중</div><div class="v" id="holdWeight"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🟢 오늘 LOC 매수</h2>
+    <table>
+      <thead><tr><th>가격($)</th><th>목표비중</th><th>1주 원화</th><th>주수</th><th>실제금액</th><th>실제비중</th></tr></thead>
+      <tbody id="buyBody"></tbody>
+    </table>
+    <div class="note">주수 = 반올림(비중금액 ÷ 1주 원화). LOC는 정수주만 가능해서 딱 안 맞을 수 있어요.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔴 LOC 매도 주문</h2>
+    <div class="grid">
+      <div class="field"><label>매도 가격 ($)</label><input id="sellPrice" type="number" value="168.86" step="0.01"></div>
+      <div class="field"><label>매도 목표 비중</label><input id="sellWeight" type="number" value="8"></div>
+    </div>
+    <div class="stat-row" style="margin-top:12px">
+      <div class="stat"><div class="k">1주 원화</div><div class="v" id="sellKrwEach"></div></div>
+      <div class="stat"><div class="k">비중금액</div><div class="v" id="sellAmt"></div></div>
+      <div class="stat hl"><div class="k">👉 매도 주수 (금액기준)</div><div class="v sell" id="sellQty"></div></div>
+    </div>
+    <div class="note">참고: 오늘 산 물량(2+2=4주)을 그대로 되파는 방식이면 <b class="sell">4주</b>예요.<br>퀀트 앱은 보통 금액기준(반올림)이라 위 숫자가 유력하지만, <span class="warn">실제 주문 넣을 때 앱이 띄우는 주수가 정답</span>이에요.</div>
+  </div>
+
+  <div class="card">
+    <h2>💰 비중별 담은 금액 (원화)</h2>
+    <table>
+      <thead><tr><th>항목</th><th>가격($)</th><th>주수</th><th>담은 금액(원)</th><th>비중</th></tr></thead>
+      <tbody id="ledgerBody"></tbody>
+      <tfoot id="ledgerFoot"></tfoot>
+    </table>
+    <div class="note">환율에 따라 조금씩 달라져요. 위 "환율" 값을 바꾸면 자동 반영됩니다.</div>
+  </div>
+
+  <div class="card">
+    <h2>📈 전체 요약 (매수 다 체결 시)</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="k">총 보유 주수</div><div class="v" id="sumQty"></div></div>
+      <div class="stat"><div class="k">총 투자금액</div><div class="v" id="sumAmt"></div></div>
+      <div class="stat hl"><div class="k">총 비중</div><div class="v" id="sumWeight"></div></div>
+      <div class="stat"><div class="k">남은 예산(원)</div><div class="v" id="remainWon"></div></div>
+      <div class="stat"><div class="k">남은 예산(비중)</div><div class="v" id="remain"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const won = n => Math.round(n).toLocaleString('ko-KR') + '원';
+const buys = [
+  { price: 163.89, weight: 4 },
+  { price: 162.23, weight: 4 },
+];
+
+function calc() {
+  const budget = +$('budget').value;
+  const fx = +$('fx').value;
+  const perWeight = budget / 100;
+  $('perWeight').textContent = won(perWeight);
+
+  // 보유
+  const hq = +$('holdQty').value, hp = +$('holdPrice').value;
+  const holdEach = hp * fx;
+  const holdTotal = holdEach * hq;
+  $('holdKrwEach').textContent = won(holdEach);
+  $('holdTotal').textContent = won(holdTotal);
+  $('holdWeight').textContent = '비중 ' + (holdTotal / perWeight).toFixed(1);
+
+  // 매수
+  let buyBody = '', buyQtySum = 0, buyAmtSum = 0;
+  buys.forEach(b => {
+    const each = b.price * fx;
+    const targetAmt = b.weight * perWeight;
+    const qty = Math.round(targetAmt / each);
+    const realAmt = qty * each;
+    buyQtySum += qty; buyAmtSum += realAmt;
+    buyBody += `<tr>
+      <td class="buy">$${b.price}</td>
+      <td>비중${b.weight}</td>
+      <td>${won(each)}</td>
+      <td><b>${qty}주</b></td>
+      <td>${won(realAmt)}</td>
+      <td>비중 ${(realAmt/perWeight).toFixed(1)}</td>
+    </tr>`;
+  });
+  $('buyBody').innerHTML = buyBody;
+
+  // 매도
+  const sp = +$('sellPrice').value, sw = +$('sellWeight').value;
+  const sellEach = sp * fx;
+  const sellAmt = sw * perWeight;
+  const sellQty = Math.round(sellAmt / sellEach);
+  $('sellKrwEach').textContent = won(sellEach);
+  $('sellAmt').textContent = won(sellAmt);
+  $('sellQty').textContent = sellQty + '주';
+
+  // 비중별 담은 금액 (원화) 원장
+  let ledger = `<tr>
+      <td>기존 보유</td><td class="buy">$${hp}</td><td>${hq}주</td>
+      <td>${won(holdTotal)}</td><td>비중 ${(holdTotal/perWeight).toFixed(1)}</td></tr>`;
+  buys.forEach(b => {
+    const each = b.price * fx;
+    const qty = Math.round((b.weight*perWeight)/each);
+    const amt = qty*each;
+    ledger += `<tr>
+      <td>오늘 매수</td><td class="buy">$${b.price}</td><td>${qty}주</td>
+      <td>${won(amt)}</td><td>비중 ${(amt/perWeight).toFixed(1)}</td></tr>`;
+  });
+  $('ledgerBody').innerHTML = ledger;
+
+  // 요약
+  const totQty = hq + buyQtySum;
+  const totAmt = holdTotal + buyAmtSum;
+  $('ledgerFoot').innerHTML = `<tr style="font-weight:700;color:#9fb4ff">
+      <td>합계</td><td></td><td>${totQty}주</td>
+      <td>${won(totAmt)}</td><td>비중 ${(totAmt/perWeight).toFixed(1)}</td></tr>`;
+  $('sumQty').textContent = totQty + '주';
+  $('sumAmt').textContent = won(totAmt);
+  $('sumWeight').textContent = '비중 ' + (totAmt/perWeight).toFixed(1);
+  $('remainWon').textContent = won(budget - totAmt);
+  $('remain').textContent = '비중 ' + (100 - totAmt/perWeight).toFixed(1);
+}
+
+document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+calc();
+</script>
+</body>
+</html>
