@@ -49,7 +49,7 @@
       <tbody id="coreBody"></tbody>
       <tfoot><tr><td colspan="3">합계</td><td class="num won" id="coreTotal"></td></tr></tfoot>
     </table>
-    <div class="note">메타 비중을 제일 높게 둔 이유: 지금 보유금액이 68만원으로 가장 적어서 다른 코어 수준까지 끌어올리려는 거예요.</div>
+    <div class="note">안정(MSFT·아마존) + 성장(엔비디아·메타) + 분산(마이크론·JPM) 균형. 메타는 68만뿐이라 캐치업하되 변동성 커서 18%로 적당히.</div>
   </div>
 
   <div class="card">
@@ -73,7 +73,7 @@
       <tbody>
         <tr><td>미국 S&P500</td><td class="tick">ETF</td><td class="num won">300,000</td><td><span class="tag t-etf">고정</span></td></tr>
         <tr><td>TIGER 미국배당다우존스</td><td class="tick">ETF</td><td class="num won">300,000</td><td><span class="tag t-etf">고정</span></td></tr>
-        <tr><td>인베스코 QQQ</td><td class="tick">QQQ</td><td class="num">—</td><td><span class="tag t-etf">여유시</span></td></tr>
+        <tr><td>인베스코 QQQ</td><td class="tick">QQQ</td><td class="num">—</td><td><span class="tag t-etf">장기유지</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -86,7 +86,6 @@
         <tr><td>알파벳C</td><td class="tick">GOOG</td><td><span class="tag t-hold">홀딩(이미 큼)</span></td></tr>
         <tr><td>알파벳A</td><td class="tick">GOOGL</td><td><span class="tag t-hold">홀딩(C로 통일)</span></td></tr>
         <tr><td>애플</td><td class="tick">AAPL</td><td><span class="tag t-hold">홀딩(이미 큼)</span></td></tr>
-        <tr><td>아마존</td><td class="tick">AMZN</td><td><span class="tag t-hold">홀딩(이미 큼)</span></td></tr>
         <tr><td>테슬라</td><td class="tick">TSLA</td><td><span class="tag t-hold">홀딩(취향)</span></td></tr>
       </tbody>
     </table>
@@ -105,11 +104,12 @@
 
 <script>
 const core = [
-  ["메타","META",26],
-  ["마이크로소프트","MSFT",20],
-  ["엔비디아","NVDA",19],
-  ["JP모건","JPM",18],
-  ["마이크론","MU",17],
+  ["마이크로소프트","MSFT",22],
+  ["엔비디아","NVDA",18],
+  ["메타","META",18],
+  ["아마존","AMZN",16],
+  ["마이크론","MU",14],
+  ["JP모건","JPM",12],
 ];
 const news = [
   ["오라클","ORCL",65],
