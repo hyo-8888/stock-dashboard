@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진짜 종목별 노출 (ETF+개별주 합산)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #0f1115; color: #e6e9ef; padding: 20px; line-height: 1.5; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  .sub { color: #8b93a7; font-size: 13px; margin-bottom: 18px; }
+  .card { background: #171a21; border: 1px solid #262b36; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  .card h2 { font-size: 15px; margin-bottom: 10px; }
+  .card h2 small { color:#8b93a7; font-weight:400; font-size:12px; }
+  label { font-size:13px; color:#8b93a7; }
+  input[type=number] { background:#0f1115; border:1px solid #2c3340; color:#e6e9ef; border-radius:8px; padding:6px 8px; font-size:14px; }
+  .etf-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .etf-row label { width:170px; }
+  .etf-row input { width:140px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top:8px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #23283340; }
+  th { color: #8b93a7; font-weight: 500; font-size: 12px; }
+  td.num, th.num { text-align:right; font-variant-numeric: tabular-nums; }
+  .tick { color:#9fb4ff; font-weight:600; font-family: ui-monospace, monospace; font-size:12px; }
+  input.small { width:90px; }
+  input.wt { width:64px; }
+  tfoot td { font-weight:700; border-top:2px solid #2c3340; }
+  .bar { height:14px; background:#2563eb; border-radius:3px; }
+  .barwrap { background:#0f1115; border-radius:3px; width:100%; }
+  .won { color:#5eead4; font-weight:600; }
+  .warn { color:#fca5a5; font-size:12px; margin-top:8px; }
+  .note { font-size:12px; color:#8b93a7; margin-top:8px; line-height:1.7; }
+  details summary { cursor:pointer; color:#9fb4ff; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔎 진짜 종목별 노출 (ETF + 개별주 합산)</h1>
+  <div class="sub">개별주 계좌만 보지 말고, QQQ·S&P500 속 비중까지 합쳐서 "실제 노출"을 봅니다</div>
+
+  <div class="card">
+    <h2>1️⃣ ETF 평가액 입력 <small>(월 적립 말고 현재 누적 총액)</small></h2>
+    <div class="etf-row"><label>QQQ 평가액(원)</label><input type="number" id="qqq" value="0" step="100000"></div>
+    <div class="etf-row"><label>S&P500 평가액(원)</label><input type="number" id="spy" value="0" step="100000"></div>
+    <div class="etf-row"><label>TIGER 배당다우(원)</label><input type="number" id="schd" value="0" step="100000"></div>
+    <div class="warn">⚠️ 본인 실제 평가액을 넣어야 결과가 정확해요. 0이면 개별주만 반영됩니다.</div>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ 개별주 평가액 <small>(수정 가능, 대략값 미리 채움)</small></h2>
+    <table>
+      <thead><tr><th>종목</th><th>티커</th><th class="num">평가액(원)</th></tr></thead>
+      <tbody id="holdBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>📊 합산 결과 — 실제 종목별 노출</h2>
+    <table>
+      <thead><tr><th>종목</th><th class="num">개별주</th><th class="num">ETF 속</th><th class="num">총 노출</th><th class="num">전체 %</th><th style="width:120px">막대</th></tr></thead>
+      <tbody id="resBody"></tbody>
+      <tfoot><tr><td colspan="3">전체 합계</td><td class="num won" id="grand"></td><td class="num">100%</td><td></td></tr></tfoot>
+    </table>
+    <div class="note" id="insight"></div>
+  </div>
+
+  <div class="card">
+    <details>
+      <summary>⚙️ ETF 내 종목 비중 (근사값 — 필요시 수정)</summary>
+      <div class="note warn">아래는 <b>대략적 추정치</b>예요. QQQ·S&P500 실제 비중은 수시로 바뀌니, 정확히 하려면 각 운용사(Invesco·해당 ETF) 최신 구성종목을 확인해서 수정하세요.</div>
+      <table>
+        <thead><tr><th>종목</th><th class="num">QQQ 비중%</th><th class="num">S&P500 비중%</th></tr></thead>
+        <tbody id="wtBody"></tbody>
+      </table>
+    </details>
+  </div>
+
+  <div class="note" style="text-align:center;margin-top:12px">
+    ※ TIGER 배당다우(SCHD형)는 배당 가치주 중심이라 위 빅테크와 거의 겹치지 않아요 → "기타 분산"으로 별도 취급.
+  </div>
+</div>
+
+<script>
+// [종목명, 티커, 개별주 평가액(대략), QQQ비중%(근사), S&P500비중%(근사)]
+const rows = [
+  ["엔비디아","NVDA",2840000, 8.5, 6.8],
+  ["마이크로소프트","MSFT",2290000, 8.0, 6.4],
+  ["애플","AAPL",4250000, 7.5, 6.6],
+  ["아마존","AMZN",4050000, 5.5, 3.9],
+  ["브로드컴","AVGO",1800000, 5.0, 2.2],
+  ["메타","META",680000, 3.8, 2.6],
+  ["구글C","GOOG",5330000, 2.4, 2.0],
+  ["구글A","GOOGL",5330000, 2.5, 2.2],
+  ["테슬라","TSLA",0, 2.8, 1.6],
+  ["JP모건","JPM",1430000, 0.0, 1.3],
+  ["마이크론","MU",2410000, 0.7, 0.2],
+];
+
+function fmt(n){ return Math.round(n).toLocaleString('ko-KR'); }
+
+function renderHold(){
+  let h='';
+  rows.forEach((r,i)=>{
+    h += `<tr><td>${r[0]}</td><td class="tick">${r[1]}</td>`+
+      `<td class="num"><input type="number" class="small" data-i="${i}" data-f="2" value="${r[2]}"></td></tr>`;
+  });
+  document.getElementById('holdBody').innerHTML = h;
+}
+function renderWt(){
+  let h='';
+  rows.forEach((r,i)=>{
+    h += `<tr><td>${r[0]} <span class="tick">${r[1]}</span></td>`+
+      `<td class="num"><input type="number" class="wt" data-i="${i}" data-f="3" value="${r[3]}" step="0.1"></td>`+
+      `<td class="num"><input type="number" class="wt" data-i="${i}" data-f="4" value="${r[4]}" step="0.1"></td></tr>`;
+  });
+  document.getElementById('wtBody').innerHTML = h;
+}
+
+function calc(){
+  const qqq=+document.getElementById('qqq').value||0;
+  const spy=+document.getElementById('spy').value||0;
+  const schd=+document.getElementById('schd').value||0;
+  let out=[], grand=0;
+  // ETF 부분 중 개별종목으로 안 잡힌 나머지 = 기타
+  let etfNamed=0;
+  rows.forEach(r=>{
+    const etfPart = qqq*r[3]/100 + spy*r[4]/100;
+    etfNamed += etfPart;
+    const total = r[2] + etfPart;
+    grand += total;
+    out.push([r[0],r[1],r[2],etfPart,total]);
+  });
+  const etfOther = Math.max(0, (qqq+spy) - etfNamed) + schd;
+  grand += etfOther;
+  out.push(["기타(ETF 나머지+배당다우)","—",0,etfOther,etfOther]);
+  out.sort((a,b)=>b[4]-a[4]);
+  const maxv = out.length?out[0][4]:1;
+  let h='';
+  out.forEach(o=>{
+    const pct = grand>0? o[4]/grand*100 : 0;
+    const bw = maxv>0? o[4]/maxv*100 : 0;
+    h += `<tr><td>${o[0]} ${o[1]!=='—'?'<span class="tick">'+o[1]+'</span>':''}</td>`+
+      `<td class="num">${o[2]?fmt(o[2]):'-'}</td>`+
+      `<td class="num">${o[3]?fmt(Math.round(o[3])):'-'}</td>`+
+      `<td class="num won">${fmt(o[4])}</td>`+
+      `<td class="num">${pct.toFixed(1)}%</td>`+
+      `<td><div class="barwrap"><div class="bar" style="width:${bw}%"></div></div></td></tr>`;
+  });
+  document.getElementById('resBody').innerHTML=h;
+  document.getElementById('grand').textContent=fmt(grand)+'원';
+  // insight
+  const top = out.filter(o=>o[1]!=='—').slice(0,3).map(o=>`${o[0]} ${(o[4]/grand*100).toFixed(0)}%`).join(', ');
+  if(grand>0) document.getElementById('insight').innerHTML = `현재 실제 노출 상위: <b>${top}</b>. ETF 평가액을 넣을수록 정확해져요. 이 "총 노출 %"를 보고 신규 자금을 <b>낮은 종목</b>에 배분하면 균형이 잡혀요.`;
+  else document.getElementById('insight').innerHTML = '위에 ETF 평가액을 입력하면 진짜 노출이 계산돼요.';
+}
+
+document.addEventListener('input', e=>{
+  const t=e.target;
+  if(t.dataset.i!==undefined && t.dataset.f!==undefined){
+    rows[+t.dataset.i][+t.dataset.f] = +t.value||0;
+  }
+  calc();
+});
+renderHold(); renderWt(); calc();
+</script>
+</body>
+</html>
