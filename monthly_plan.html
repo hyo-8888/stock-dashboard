@@ -28,6 +28,9 @@
   .tag { display:inline-block; font-size:10px; padding:2px 7px; border-radius:20px; margin-left:6px; }
   .t-hold { background:#2a2a3a; color:#c4b5fd; }
   .t-etf  { background:#0f2e22; color:#5eead4; }
+  .t-toss { background:#0e2540; color:#7cc0ff; }
+  .t-mini { background:#3a2a0e; color:#fcd34d; }
+  .t-lev  { background:#3a1420; color:#fca5a5; }
   .note { font-size:12px; color:#8b93a7; margin-top:10px; line-height:1.7; }
   .warn { color:#fca5a5; }
   a.link { color:#9fb4ff; font-size:12px; }
@@ -42,35 +45,35 @@
     <h2>🎯 개별주 정기매수 (매일 소수점)</h2>
     <div class="budget-row">
       <label>월 예산(원)</label>
-      <input type="number" id="budget" value="1000000" step="10000">
+      <input type="number" id="budget" value="850000" step="10000">
       <label>월 일수</label>
       <input type="number" id="days" value="30" step="1" style="width:70px">
-      <span style="font-size:12px;color:#8b93a7">비중 합계 = <span id="wsum">100</span></span>
+      <span style="font-size:12px;color:#8b93a7">비중 합계 = <span id="wsum">85</span></span>
     </div>
     <table>
-      <thead><tr><th>종목</th><th>티커</th><th class="num">비중</th><th class="num">월 투자액</th><th class="num">하루</th></tr></thead>
+      <thead><tr><th>종목</th><th>티커</th><th>앱</th><th class="num">비중</th><th class="num">월 투자액</th><th class="num">하루</th></tr></thead>
       <tbody id="body"></tbody>
-      <tfoot><tr><td colspan="3">합계</td><td class="num won" id="total"></td><td class="num day" id="dayTotal"></td></tr></tfoot>
+      <tfoot><tr><td colspan="4">합계</td><td class="num won" id="total"></td><td class="num day" id="dayTotal"></td></tr></tfoot>
     </table>
     <div class="note">
       • <b>개별주 = 5~10년 성장 포트</b> (ETF는 평생 자산, 개별주는 논리 바뀌면 교체)<br>
-      • <b>MS·메타·아마존·오라클</b> = 메가캡·AI·클라우드 성장축<br>
-      • <b>JP모건 13%</b> = 유일한 비(非)기술 분산축(기술주와 다르게 움직임) → <b>1년에 한 번 역할 재검토</b><br>
-      • <b>구글C 2만</b> = 상징적 유지 (이미 1,000만+ 최대 보유라 신규는 최소)<br>
+      • <b>MS·오라클</b> = 핵심 신규 성장축 / <b>메타</b> = 보유가 적어 캐치업 / <b>아마존</b> = 이미 크게 보유라 소액<br>
+      • <b>오라클·QLD = 토스</b>(신규·실시간 소수점) / <b>MS·메타·아마존 = 미니스탁</b>(기존 보유분에 이어 적립)<br>
+      • <b>구글·JPM·아마존</b>은 QLD·기존 보유로 노출 충분 → 새 돈은 부족한 축(MS·메타·오라클)에 집중<br>
       • 매일 조금씩 빠지고 토·일치는 월요일에 몰아서 체결되는 구조
     </div>
   </div>
 
   <div class="card">
-    <h2>🏦 장기 고정 적립 (그대로 유지)</h2>
+    <h2>🏦 ETF·QLD 적립</h2>
     <table>
       <tbody>
-        <tr><td>미국 S&P500</td><td class="tick">ETF</td><td class="num won">300,000</td><td><span class="tag t-etf">고정</span></td></tr>
-        <tr><td>TIGER 미국배당다우존스</td><td class="tick">ETF</td><td class="num won">300,000</td><td><span class="tag t-etf">고정</span></td></tr>
-        <tr><td>인베스코 QQQ</td><td class="tick">QQQ</td><td class="num won">300,000</td><td><span class="tag t-etf">장기유지</span></td></tr>
+        <tr><td>미국 S&P500</td><td class="tick">ETF</td><td class="num won">300,000</td><td class="num day">10,000</td><td><span class="tag t-etf">ISA·고정</span></td></tr>
+        <tr><td>TIGER 미국배당다우존스</td><td class="tick">ETF</td><td class="num won">300,000</td><td class="num day">10,000</td><td><span class="tag t-etf">ISA·방어</span></td></tr>
+        <tr><td>QLD (나스닥 2배)</td><td class="tick">QLD</td><td class="num won">450,000</td><td class="num day">15,000</td><td><span class="tag t-toss">토스</span><span class="tag t-lev">레버리지</span></td></tr>
       </tbody>
     </table>
-    <div class="note">QQQ·S&P500에 이미 M7이 잔뜩 들어있어요 → 개별주는 "분산"이 아니라 <b>더 믿는 종목 오버웨이트</b>. 진짜 노출은 <a class="link" href="exposure.html">합산 계산기</a>로 확인.</div>
+    <div class="note">• S&P·배당다우 = <b>ISA(국내상장, 세제혜택)</b>, 은퇴까지 장기 코어 / QLD = <b>일반계좌(토스)·소수점 하루 15,000</b><br>• <b class="warn">QLD는 2배 레버리지</b> — 폭락장 -50%↑ 가능. 매일 적립 + 폭락해도 안 팔고 계속 사는 게 전제. 진짜 노출은 <a class="link" href="exposure.html">합산 계산기</a>로 확인.</div>
   </div>
 
   <div class="card">
@@ -78,7 +81,9 @@
     <table>
       <tbody>
         <tr><td>애플</td><td class="tick">AAPL</td><td><span class="tag t-hold">홀딩(이미 큼·성장완만)</span></td></tr>
-        <tr><td>알파벳A</td><td class="tick">GOOGL</td><td><span class="tag t-hold">홀딩(C로 통일)</span></td></tr>
+        <tr><td>알파벳A</td><td class="tick">GOOGL</td><td><span class="tag t-hold">홀딩(이미 1,000만+·QLD 커버)</span></td></tr>
+        <tr><td>알파벳C</td><td class="tick">GOOG</td><td><span class="tag t-hold">홀딩(신규 중단)</span></td></tr>
+        <tr><td>JP모건</td><td class="tick">JPM</td><td><span class="tag t-hold">홀딩(안정판·신규 중단)</span></td></tr>
         <tr><td>엔비디아</td><td class="tick">NVDA</td><td><span class="tag t-hold">홀딩(ETF로 충분)</span></td></tr>
         <tr><td>마이크론</td><td class="tick">MU</td><td><span class="tag t-hold">홀딩(추가매수 중단)</span></td></tr>
         <tr><td>브로드컴</td><td class="tick">AVGO</td><td><span class="tag t-hold">홀딩(추가매수 중단)</span></td></tr>
@@ -94,18 +99,16 @@
   </div>
 
   <div class="note" style="text-align:center;margin-top:16px">
-    총 월 고정 투입 = 개별주 <span class="won" id="grandCore"></span> + ETF 900,000원 = <span class="won" id="grandAll"></span>
+    총 월 투입 = 개별주 <span class="won" id="grandCore"></span> + ETF·QLD 1,050,000원 = <span class="won" id="grandAll"></span>
   </div>
 </div>
 
 <script>
 const core = [
-  ["마이크로소프트","MSFT",25],
-  ["메타","META",22],
-  ["아마존","AMZN",20],
-  ["오라클","ORCL",18],
-  ["JP모건","JPM",13],
-  ["구글C","GOOG",2],
+  ["마이크로소프트","MSFT",25,"미니스탁"],
+  ["메타","META",25,"미니스탁"],
+  ["오라클","ORCL",20,"토스"],
+  ["아마존","AMZN",15,"미니스탁"],
 ];
 
 function fmt(n){ return Math.round(n).toLocaleString('ko-KR'); }
@@ -120,7 +123,9 @@ function render(){
     const amt = wsum>0 ? budget*r[2]/wsum : 0;
     total += amt;
     const per = days>0 ? amt/days : 0;
+    const appCls = r[3]==='토스' ? 't-toss' : 't-mini';
     html += `<tr><td>${r[0]}</td><td class="tick">${r[1]}</td>`+
+      `<td><span class="tag ${appCls}">${r[3]}</span></td>`+
       `<td class="num"><input type="number" class="wt" data-i="${i}" value="${r[2]}"></td>`+
       `<td class="num won">${fmt(amt)}원</td>`+
       `<td class="num day">${fmt(per)}원</td></tr>`;
@@ -129,7 +134,7 @@ function render(){
   document.getElementById('total').textContent = fmt(total)+'원';
   document.getElementById('dayTotal').textContent = fmt(days>0?total/days:0)+'원';
   document.getElementById('grandCore').textContent = fmt(total)+'원';
-  document.getElementById('grandAll').textContent = fmt(total+900000)+'원';
+  document.getElementById('grandAll').textContent = fmt(total+1050000)+'원';
 }
 
 document.addEventListener('input', e=>{
